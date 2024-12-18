@@ -1,0 +1,39 @@
+Description:
+Write a program that uses a while loop to find the factorial of a given number.
+
+What is the Factorial of an integer 
+N
+N?
+A factorial is a function that multiplies a number by every number below it till 1.
+For example, the factorial of 3 represents the multiplication of numbers 3, 2, 1, i.e. 3! = 3 × 2 × 1 and is equal to 6.
+
+Check sample input / output below for more clarity.
+
+Input Format
+There are multiple test files.
+
+Each input test file contains only 1 integer 
+N
+N.
+
+Output Format
+For each test file, output only the integer which is Factorial of 
+N
+N.
+
+You do not need to output anything else.
+
+Sample 1:
+Input      Output
+5          120
+Explanation:
+Factorial of 5 = 1 * 2 * 3 * 4 * 5 = 120
+
+Python3:
+# cook your dish here
+num = int(input())
+x = 1
+while num > 0:
+    x = x * num
+    num -= 1
+print(x)
