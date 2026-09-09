@@ -1,0 +1,496 @@
+Description:
+This is the easy version of the problem. Here, 
+N
+N is odd and you must construct a valid sequence of subarrays for 
+K
+=
+N
++
+1
+2
+K= 
+2
+N+1
+​
+ .
+The setup of both problems is otherwise the same.
+
+You are given a permutation 
+P
+P of length 
+N
+N, where 
+N
+N is odd.
+A permutation of length 
+N
+N is an array of length 
+N
+N that contains every integer from 
+1
+1 to 
+N
+N exactly once each.
+
+Let 
+K
+=
+N
++
+1
+2
+K= 
+2
+N+1
+​
+ .
+Find a sequence of 
+K
+K subarrays 
+[
+L
+1
+,
+R
+1
+]
+,
+[
+L
+2
+,
+R
+2
+]
+,
+…
+,
+[
+L
+K
+,
+R
+K
+]
+[L 
+1
+​
+ ,R 
+1
+​
+ ],[L 
+2
+​
+ ,R 
+2
+​
+ ],…,[L 
+K
+​
+ ,R 
+K
+​
+ ] such that all the following conditions hold:
+
+For each 
+1
+≤
+i
+≤
+K
+1≤i≤K, the length of 
+[
+L
+i
+,
+R
+i
+]
+[L 
+i
+​
+ ,R 
+i
+​
+ ] is exactly 
+2
+i
+−
+1
+2i−1. That is, 
+R
+i
+−
+L
+i
++
+1
+=
+2
+i
+−
+1
+R 
+i
+​
+ −L 
+i
+​
+ +1=2i−1.
+For each 
+2
+≤
+i
+≤
+K
+2≤i≤K, the subarray 
+[
+L
+i
+,
+R
+i
+]
+[L 
+i
+​
+ ,R 
+i
+​
+ ] contains 
+[
+L
+i
+−
+1
+,
+R
+i
+−
+1
+]
+[L 
+i−1
+​
+ ,R 
+i−1
+​
+ ]. That is, 
+L
+i
+≤
+L
+i
+−
+1
+L 
+i
+​
+ ≤L 
+i−1
+​
+  and 
+R
+i
+−
+1
+≤
+R
+i
+R 
+i−1
+​
+ ≤R 
+i
+​
+ .
+The medians of these 
+K
+K subarrays are strictly increasing.
+The median of an array of odd length is its middle element after sorting it. For example, the median of 
+[
+4
+,
+1
+,
+3
+]
+[4,1,3] is 
+3
+3.
+
+If many such sequences exist, you may find any of them.
+If no such sequence exists, print 
+−
+1
+−1.
+
+Input Format
+The first line of input will contain a single integer 
+T
+T, denoting the number of test cases.
+Each test case consists of two lines of input.
+The first line of each test case contains a single integer 
+N
+N — the length of the permutation.
+The second line of each test case contains 
+N
+N space-separated integers 
+P
+1
+,
+…
+,
+P
+N
+P 
+1
+​
+ ,…,P 
+N
+​
+ .
+Output Format
+For each test case:
+
+If no valid sequence exists, print 
+−
+1
+−1 on a new line.
+Otherwise, print 
+K
+=
+N
++
+1
+2
+K= 
+2
+N+1
+​
+  lines. On the 
+i
+i-th line, print two space-separated integers 
+L
+i
+L 
+i
+​
+  and 
+R
+i
+R 
+i
+​
+ , denoting the endpoints of the 
+i
+i-th subarray.
+If there are multiple valid sequences, you may print any of them.
+
+Constraints
+1
+≤
+T
+≤
+10
+5
+1≤T≤10 
+5
+ 
+1
+≤
+N
+<
+2
+⋅
+10
+5
+1≤N<2⋅10 
+5
+ 
+N
+N is odd.
+P
+P is a permutation of 
+[
+1
+,
+N
+]
+[1,N].
+The sum of 
+N
+N over all test cases does not exceed 
+2
+⋅
+10
+5
+2⋅10 
+5
+ .
+Sample 1:
+Input
+Output
+5
+1
+1
+3
+2 3 1
+5
+1 3 4 2 5
+7
+4 7 2 6 1 5 3
+7
+1 2 4 5 6 3 7
+1 1
+3 3
+1 3
+-1
+5 5
+3 5
+3 7
+1 7
+-1
+Explanation:
+Test case 
+1
+1: There's only a single subarray, and it satisfies the condition.
+
+Test case 
+2
+2: We have 
+P
+=
+[
+2
+,
+3
+,
+1
+]
+P=[2,3,1]. Consider the sequence of subarrays 
+[
+1
+]
+,
+[
+2
+,
+3
+,
+1
+]
+[1],[2,3,1]. They satisfy the conditions, because:
+
+Their lengths are 
+1
+1 and 
+3
+3.
+The first subarray is contained in the second.
+Their medians are 
+1
+1 and 
+2
+2 in order, which is strictly increasing.
+So, this is a valid sequence of subarrays.
+We print the endpoints of the subarrays, which is 
+[
+3
+,
+3
+]
+[3,3] for 
+[
+1
+]
+[1] and 
+[
+1
+,
+3
+]
+[1,3] for 
+[
+2
+,
+3
+,
+1
+]
+[2,3,1].
+
+Test case 
+3
+3: It can be verified that no valid sequence of subarrays satisfying the conditions exists.
+
+Python3:
+# cook your dish here
+import sys
+
+
+def solve():
+    input_stream = sys.stdin.readline
+
+    num_test_cases = int(input_stream())
+
+    for _ in range(num_test_cases):
+        array_size = int(input_stream())
+        permutation = list(map(int, input_stream().split()))
+
+        max_steps = (array_size + 1) // 2
+
+        # Map each number to its 0-based index
+        value_indices = [0] * (array_size + 1)
+        for idx, val in enumerate(permutation):
+            value_indices[val] = idx
+
+        # Track bounding indices for prefix values [1..k]
+        prefix_min_idx = [0] * (max_steps + 1)
+        prefix_max_idx = [0] * (max_steps + 1)
+
+        curr_min_bound = value_indices[1]
+        curr_max_bound = value_indices[1]
+
+        prefix_min_idx[1] = curr_min_bound
+        prefix_max_idx[1] = curr_max_bound
+
+        is_valid = True
+
+        for k in range(2, max_steps + 1):
+            curr_min_bound = min(curr_min_bound, value_indices[k])
+            curr_max_bound = max(curr_max_bound, value_indices[k])
+
+            prefix_min_idx[k] = curr_min_bound
+            prefix_max_idx[k] = curr_max_bound
+
+            if curr_max_bound - curr_min_bound > 2 * k - 2:
+                is_valid = False
+
+        if not is_valid:
+            print(-1)
+            continue
+
+        intervals = [None] * max_steps
+
+        start_ptr = 0
+        end_ptr = array_size - 1
+
+        intervals[max_steps - 1] = (start_ptr, end_ptr)
+
+        # Reconstruct intervals in reverse
+        for step in range(max_steps - 1, 0, -1):
+            shift_left = min(2, prefix_min_idx[step] - start_ptr)
+            shift_right = 2 - shift_left
+
+            start_ptr += shift_left
+            end_ptr -= shift_right
+
+            intervals[step - 1] = (start_ptr, end_ptr)
+
+        for l_bound, r_bound in intervals:
+            print(l_bound + 1, r_bound + 1)
+
+
+if __name__ == "__main__":
+    solve()
